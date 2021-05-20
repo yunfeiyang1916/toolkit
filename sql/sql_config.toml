@@ -1,0 +1,9 @@
+[[database]]
+name="test1"
+master = "xue:123456@tcp(192.168.40.22)/live_serviceinfo?charset=utf8"
+slaves = ["xue:123456@tcp(192.168.40.22)/live_serviceinfo?charset=utf8"]
+
+[[database]]
+name="test2"
+master = "xue:123456@tcp(192.168.40.22)/live_serviceinfo?charset=utf8"
+slaves = ["xue:123456@tcp(192.168.40.22)/live_serviceinfo?charset=utf8"]
