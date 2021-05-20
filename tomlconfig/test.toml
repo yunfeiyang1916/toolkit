@@ -1,0 +1,30 @@
+[server]
+name="long_link_proxy"
+port = 6270
+ [server.tcp]
+ idle_timeout=120
+ keepalink_interval=120
+
+[log]
+level="debug"
+businesslog="./business.log"
+serverlog="./server.log"
+statLog="./stat.log" 
+
+
+
+[[server_client]]
+service="service1"
+ipport="127.0.0.1:2181;127.0.0.1:2182;127.0.0.1:2183"
+balancetype=1
+
+[[server_client]]
+service="service2"
+ipport="127.0.0.1:2181;127.0.0.1:2182;127.0.0.1:2183"
+balancetype=2
+
+
+
+
+
+
