@@ -1,0 +1,44 @@
+before_script:
+    - echo $CI_PROJECT_DIR
+    - echo $CI_PROJECT_PATH
+    - export GOPATH=${CI_PROJECT_DIR%"${CI_PROJECT_PATH}"}
+    - echo ${GOPATH}
+    - export GO_PROJECT_PATH="$GOPATH/src/git.inke.cn/BackendPlatform"
+    - echo $GO_PROJECT_PATH
+    - rm -rf  "$GO_PROJECT_PATH/$CI_PROJECT_NAME"
+    - mkdir -p $GO_PROJECT_PATH
+    - ln -s $(pwd) $GO_PROJECT_PATH
+    - export GO_PROJECT_PATH="$GO_PROJECT_PATH/$CI_PROJECT_NAME"
+    - echo $GO_PROJECT_PATH
+    - cd $GO_PROJECT_PATH
+    - inkedep build
+
+stages:
+    - test
+    - check
+
+go_test:
+    stage: test
+    script:
+        - go test -race -cover $(go list ./... | grep -v "vendor" | grep -v "examples")
+        - sh coverage.sh
+
+golangci_lint:
+    stage: check
+    script:
+        - golangci-lint run -v
+
+go_run:
+    stage: check
+    script:
+        - rm -rf daenerys-example-master.tar.gz
+        - rm -rf daenerys-example-master
+        - curl 'https://code.inke.cn/BackendPlatform/daenerys-example/-/archive/master/daenerys-example-master.tar.gz' -o daenerys-example-master.tar.gz
+        - tar -xvf daenerys-example-master.tar.gz 
+        - export GO_CHECK_PATH="${GOPATH}"/src/git.inke.cn/BackendPlatform/daenerys-example
+        - rm -rf ${GO_CHECK_PATH}
+        - cd daenerys-example-master
+        - ln -s $(pwd) ${GO_CHECK_PATH}
+        - cd ${GO_CHECK_PATH}/quickstart
+        - chmod a+x api_check.sh
+        - sh api_check.sh

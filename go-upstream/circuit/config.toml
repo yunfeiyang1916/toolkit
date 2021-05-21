@@ -1,0 +1,4 @@
+[circuit.system."/push/send"]
+	end = "client"
+	open = true
+	threshold = 10.0

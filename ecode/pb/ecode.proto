@@ -1,0 +1,7 @@
+syntax = "proto2";
+package pb;
+
+message Error {
+    required int32 dm_error = 1;
+    required string err_msg = 2;
+}
