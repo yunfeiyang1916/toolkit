@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"strings"
 
-	"git.inke.cn/tpc/inf/go-upstream/registry"
 	"github.com/yunfeiyang1916/toolkit/framework/config/reader"
+	"github.com/yunfeiyang1916/toolkit/go-upstream/registry"
 )
 
 type Watcher interface {

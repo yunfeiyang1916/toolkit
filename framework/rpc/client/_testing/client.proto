@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package echo;
+option py_generic_services = true;
+
+
+enum ResponseCode {
+    SUCCESS = 0;
+    INTERNAL_ERROR = 1;
+    PARAM_ERROR = 2;
+};
+
+message EchoRequest {
+	required string message = 1;
+	optional bool error = 2;
+};
+
+message EchoResponse {
+	required string response = 1;
+	required ResponseCode code = 2;
+};
+
+service EchoService {
+    rpc Echo (EchoRequest) returns (EchoResponse);
+};
