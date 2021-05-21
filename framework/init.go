@@ -8,10 +8,6 @@ import (
 
 	"github.com/yunfeiyang1916/toolkit/framework/config"
 	"github.com/yunfeiyang1916/toolkit/framework/internal/kit/tracing"
-	clusterconfig "github.com/yunfeiyang1916/toolkit/go-upstream/config"
-	"github.com/yunfeiyang1916/toolkit/go-upstream/registry"
-	"github.com/yunfeiyang1916/toolkit/go-upstream/registry/consul"
-	"github.com/yunfeiyang1916/toolkit/logging"
 )
 
 var (
@@ -60,7 +56,7 @@ func init() {
 	tracing.InitTraceAPIAddr(fallbackTraceAPIAddr)
 
 	config.ConsulAddr = consulAddr
-
-	registry.Default, _ = consul.NewBackend(&clusterconfig.Consul{Addr: consulAddr, Scheme: "http", Logger: logging.Log(logging.GenLoggerName)})
+	// 暂时不需要注册中心
+	// registry.Default, _ = consul.NewBackend(&clusterconfig.Consul{Addr: consulAddr, Scheme: "http", Logger: logging.Log(logging.GenLoggerName)})
 
 }

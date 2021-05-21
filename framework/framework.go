@@ -100,8 +100,8 @@ func (d *Framework) Init(options ...Option) {
 		// 设置服务发现名
 		d.initLocalAppServiceName(cc)
 
-		// 处理远程开关逻辑
-		initRemoteFirst(d.localAppServiceName)
+		// 暂时不处理远程开关逻辑
+		// initRemoteFirst(d.localAppServiceName)
 
 		d.pendingServerClientLock.Lock()
 		pending := d.pendingServerClientTask

@@ -307,8 +307,8 @@ func (d *Framework) initConfigInstance() error {
 
 		d.configInstance = c
 
-		// 上传本地配置到kae,该配置指框架约定的config.toml,包含app子路径下的config.toml
-		d.uploadConfig(d.ConfigPath)
+		// 不需要了。 上传本地配置到kae,该配置指框架约定的config.toml,包含app子路径下的config.toml
+		// d.uploadConfig(d.ConfigPath)
 	}
 
 	return nil
