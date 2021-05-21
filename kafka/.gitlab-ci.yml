@@ -31,13 +31,13 @@ golangci_lint:
 go_run:
     stage: check
     script:
-        - rm -rf daenerys-example-master.tar.gz
-        - rm -rf daenerys-example-master
-        - curl 'https://code.inke.cn/BackendPlatform/daenerys-example/-/archive/master/daenerys-example-master.tar.gz' -o daenerys-example-master.tar.gz
-        - tar -xvf daenerys-example-master.tar.gz 
-        - export GO_CHECK_PATH="${GOPATH}"/src/git.inke.cn/BackendPlatform/daenerys-example
+        - rm -rf framework-example-master.tar.gz
+        - rm -rf framework-example-master
+        - curl 'https://code.inke.cn/BackendPlatform/framework-example/-/archive/master/framework-example-master.tar.gz' -o framework-example-master.tar.gz
+        - tar -xvf framework-example-master.tar.gz
+        - export GO_CHECK_PATH="${GOPATH}"/src/git.inke.cn/BackendPlatform/framework-example
         - rm -rf ${GO_CHECK_PATH}
-        - cd daenerys-example-master
+        - cd framework-example-master
         - ln -s $(pwd) ${GO_CHECK_PATH}
         - cd ${GO_CHECK_PATH}/quickstart
         - chmod a+x api_check.sh

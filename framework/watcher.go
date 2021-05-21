@@ -38,7 +38,7 @@ func decodeConfig(data map[string]string) {
 		)
 	}
 
-	// /app/loadtest/config.toml加载新的daenerys
+	// /app/loadtest/config.toml加载新的framework
 	// /app/yimi/config.toml
 	// /config.toml
 	for k, v := range data {

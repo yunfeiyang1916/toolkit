@@ -137,7 +137,7 @@ func (d *Framework) Init(options ...Option) {
 		}
 
 		curTime := time.Now().Format(utils.TimeFormat)
-		fmt.Printf("%s init daenerys success app:%s name:%s namespace:%s config:%s\n",
+		fmt.Printf("%s init framework success app:%s name:%s namespace:%s config:%s\n",
 			curTime, d.App, d.Name, d.Namespace, d.ConfigPath)
 	})
 }

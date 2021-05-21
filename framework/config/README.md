@@ -1,12 +1,12 @@
-# Daenerys Config模块使用手册
+# framework Config模块使用手册
 
-> Daenerys Config模块主要用于解析配置文件，支持多数据源加载，多文件加载，动态监听等功能。
+> framework Config模块主要用于解析配置文件，支持多数据源加载，多文件加载，动态监听等功能。
 > 目前最常用的使用方式是加载本地配置文件和远程配置文件。
 
 ## 加载配置文件
 
 ### 1.本地配置文件
-> 一般使用Daenerys框架时,默认情况下会使用约定路径下的配置文件,即服务运行路径下的 config/config.toml。
+> 一般使用framework框架时,默认情况下会使用约定路径下的配置文件,即服务运行路径下的 config/config.toml。
 手动启动服务命令示例：./app 或者 ./app --config ./config/config.toml
 
 框架加载配置文件的代码示例，以下代码是通过代码模版工具生成的，无需使用者手动添加。
@@ -15,14 +15,14 @@ func init() {
 	configS := flag.String("config", "config/config.toml", "Configuration file")
 	flag.Parse()
 	// 加载配置文件
-	daenerys.Init(daenerys.ConfigPath(*configS))
+	framework.Init(framework.ConfigPath(*configS))
 }
 ```
 
 如果需要手动加载其他配置文件内容，可以通过以下附加方式实现。加载后会将之前的配置和本次加载的配置合并。
 * 注意：如果两个文件中存在相同配置项，那么后加载的会覆盖前者。使用者应该避免这种情况。
 ```go
-err := daenerys.File("/abs/path/xxx.json")
+err := framework.File("/abs/path/xxx.json")
 if err!=nil{
 	panic(err)
 }
@@ -36,7 +36,7 @@ if err!=nil{
 如果需要手动加载远程配置，可以通过以下附加方式实现。加载后会将之前的配置和本次加载的配置合并。
 ```go
 // 短路径
-err := daenerys.Remote("/xxx")
+err := framework.Remote("/xxx")
 if err != nil {
 	panic(err)
 }
@@ -50,11 +50,11 @@ if err != nil {
 	configS := flag.String("config", "config/config.toml", "Configuration file")
 	appS := flag.String("app", "", "App dir")
 	flag.Parse()
-	daenerys.Init(
-		daenerys.ConfigPath(*configS),
+	framework.Init(
+		framework.ConfigPath(*configS),
 	)
 	if *appS != "" {
-		daenerys.InitNamespace(*appS)
+		framework.InitNamespace(*appS)
 	}
 ```
 使用多namespace方式启动服务：
@@ -105,7 +105,7 @@ type Values interface {
 >下面介绍一些通用的使用方式：
 ```go
     // 获取之前加载配置文件后的Config实例
-    c := daenerys.ConfigInstance()
+    c := framework.ConfigInstance()
 
     // 重新加载所有资源，获取最新配置
     err := c.Sync()
@@ -158,9 +158,9 @@ type Values interface {
 
 以下是示例代码，此处只是演示使用，通常情况下无需手动设置appkey，appkey会从请求中自动提取到。
 ```go
-	ctx := daenerys.WithAPPKey(context.Background(),"meetstar")
+	ctx := framework.WithAPPKey(context.Background(),"meetstar")
     // 获取Config实例,使用方式见：通用使用方式
-    c := daenerys.ConfigInstanceCtx(ctx)
+    c := framework.ConfigInstanceCtx(ctx)
 ```
 
 ### 监听指定path的远程配置
@@ -173,7 +173,7 @@ type Values interface {
     // 监听远程绝对路径：/service_config/aa/aa.bb.cc/test，当test中内容有更新时返回数据
 	go func() {
 		p := "/test"
-		w := daenerys.WatchKV(p)
+		w := framework.WatchKV(p)
 		for {
 			// will block
 			value := w.Next()
@@ -189,7 +189,7 @@ type Values interface {
     // Next返回值是个map, key为短路径：/a/a.toml, /b/b.toml, value为该路径对应的值
 	go func() {
 		p := "/test"
-		w := daenerys.WatchPrefix(p)
+		w := framework.WatchPrefix(p)
 		for {
 			// will block
 			value := w.Next()
@@ -198,7 +198,7 @@ type Values interface {
 	}()
 
     // 直接获取远程配置
-    str, err := daenerys.RemoteKV(p)
+    str, err := framework.RemoteKV(p)
     if err != nil {
     	panic(err)
     }
