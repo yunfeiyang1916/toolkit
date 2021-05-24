@@ -7,9 +7,7 @@ import (
 	"github.com/yunfeiyang1916/toolkit/logging"
 
 	"github.com/yunfeiyang1916/toolkit/framework/config/source"
-	clusterconfig "github.com/yunfeiyang1916/toolkit/go-upstream/config"
 	"github.com/yunfeiyang1916/toolkit/go-upstream/registry"
-	iconsul "github.com/yunfeiyang1916/toolkit/go-upstream/registry/consul"
 )
 
 // Currently a single consul reader
@@ -70,9 +68,10 @@ func NewSource(opts ...source.Option) source.Source {
 	if len(addr) == 0 {
 		addr = "127.0.0.1:8500"
 	}
-	if registry.Default == nil {
-		registry.Default, _ = iconsul.NewBackend(&clusterconfig.Consul{Addr: addr, Scheme: "http", Logger: logging.Log(logging.GenLoggerName)})
-	}
+	// 暂时注掉
+	//if registry.Default == nil {
+	//	registry.Default, _ = iconsul.NewBackend(&clusterconfig.Consul{Addr: addr, Scheme: "http", Logger: logging.Log(logging.GenLoggerName)})
+	//}
 
 	return &consul{
 		prefix:      prefix,

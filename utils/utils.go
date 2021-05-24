@@ -7,7 +7,6 @@ import (
 	"strings"
 	"time"
 
-	goMetrics "github.com/rcrowley/go-metrics"
 	metrics "github.com/yunfeiyang1916/toolkit/metrics"
 )
 
@@ -60,7 +59,8 @@ func init() {
 	if statInterval == 0 {
 		statInterval = 60
 	}
-	go metrics.FalconWithTags(goMetrics.DefaultRegistry, time.Duration(statInterval)*time.Second, map[string]string{statProjectTag: statMetric})
+	// 暂时注掉
+	// go metrics.FalconWithTags(goMetrics.DefaultRegistry, time.Duration(statInterval)*time.Second, map[string]string{statProjectTag: statMetric})
 	if stFileName != "" {
 		metrics.SetStatOutput(stFileName)
 	}

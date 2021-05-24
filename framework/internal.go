@@ -282,8 +282,9 @@ func (d *Framework) initDefaultOnce() {
 		}
 
 		// breaker limiter watcher init once
-		remotePath := getRegistryKVPath(d.localAppServiceName)
-		initConfigWatcher(remotePath)
+		// 下面两行暂时注掉
+		// remotePath := getRegistryKVPath(d.localAppServiceName)
+		// initConfigWatcher(remotePath)
 		defaultServerBreaker = breaker.NewConfig(nil)
 		defaultServerLimiter = ratelimit.NewConfig(nil)
 	})
@@ -307,7 +308,7 @@ func (d *Framework) initConfigInstance() error {
 
 		d.configInstance = c
 
-		// 不需要了。 上传本地配置到kae,该配置指框架约定的config.toml,包含app子路径下的config.toml
+		// 暂时不需要了。 上传本地配置到kae,该配置指框架约定的config.toml,包含app子路径下的config.toml
 		// d.uploadConfig(d.ConfigPath)
 	}
 
@@ -510,7 +511,8 @@ func (d *Framework) initStat() {
 		logging.GenLogf("on initStat, remote first disabled, reloading local success code:%+v", localSuccCodeMap)
 		metrics.ReloadSuccessCode(localSuccCodeMap)
 	})
-
+	// 暂时注掉
+	return
 	go func() {
 		var lastValues []int
 		type statCodeValues struct {
@@ -545,6 +547,8 @@ func (d *Framework) initStat() {
 }
 
 func (d *Framework) initGolangTrace() {
+	// 暂时注掉
+	return
 	if d.config.Trace.Disable {
 		return
 	}

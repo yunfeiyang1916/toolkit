@@ -119,12 +119,13 @@ func (s *server) Run(addr ...string) error {
 		}
 		logging.GenLogf("start http server on %s", host)
 		fmt.Printf("start http server on %s\n", host)
-		var cfg *config.Register
-		cfg, err = dutils.Register(s.options.manager, s.options.serviceName, "http", s.options.tags, config.LocalIPString(), port)
-		if err != nil {
-			return
-		}
-		s.registryConfig = cfg
+		// 暂时注掉，暂不需要服务注册
+		//var cfg *config.Register
+		//cfg, err = dutils.Register(s.options.manager, s.options.serviceName, "http", s.options.tags, config.LocalIPString(), port)
+		//if err != nil {
+		//	return
+		//}
+		//s.registryConfig = cfg
 
 		if !atomic.CompareAndSwapInt32(&s.running, 0, 1) {
 			err = fmt.Errorf("server has been running")
