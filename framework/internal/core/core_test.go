@@ -1,11 +1,11 @@
 package core
 
 import (
+	"context"
 	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/net/context"
 )
 
 func TestPluginGeneralCase(t *testing.T) {
@@ -17,7 +17,7 @@ func TestPluginGeneralCase(t *testing.T) {
 		signature += "B"
 	}), Function(func(_ context.Context, c Core) {
 		signature += "C"
-	})).Use(Function(func(_ context.Context, c Core) {
+	})).Use(Function(func(_ context.Context, core Core) {
 		signature += "D"
 	}))
 	c.Next(context.TODO())

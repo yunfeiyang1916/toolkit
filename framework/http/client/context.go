@@ -1,10 +1,10 @@
 package client
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/yunfeiyang1916/toolkit/framework/internal/core"
-	"golang.org/x/net/context"
 )
 
 type internalContext struct{}

@@ -2,7 +2,7 @@ package core
 
 import "context"
 
-// defaultCore 核心默认实现
+// defaultCore 插件管理器默认实现
 type defaultCore struct {
 	// 插件集合
 	plugins []Plugin
@@ -11,6 +11,7 @@ type defaultCore struct {
 	err   error
 }
 
+// New 构造插件处理器
 func New(ps []Plugin) Core {
 	return &defaultCore{
 		plugins: ps,
@@ -44,6 +45,7 @@ func (c *defaultCore) AbortErr(err error) {
 	c.err = err
 }
 
+// Err 获取执行中的错误
 func (c *defaultCore) Err() error {
 	return c.err
 }
@@ -53,6 +55,7 @@ func (c *defaultCore) IsAborted() bool {
 	return c.index >= len(c.plugins)
 }
 
+// Index 索引
 func (c *defaultCore) Index() int {
 	return c.index
 }

@@ -2,7 +2,7 @@ package core
 
 import "context"
 
-// Core 核心接口
+// Core 插件管理器接口
 type Core interface {
 	// Use 应用插件
 	Use(...Plugin) Core
@@ -14,9 +14,12 @@ type Core interface {
 	Abort()
 	// IsAborted 是否已放弃
 	IsAborted() bool
+	// Err 获取执行中的错误
 	Err() error
 	// Copy 复制
 	Copy() Core
+	// Index 索引
 	Index() int
+	// Reset 重置
 	Reset(idx int)
 }

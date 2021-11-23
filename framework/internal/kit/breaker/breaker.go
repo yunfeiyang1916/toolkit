@@ -1,11 +1,13 @@
 package breaker
 
 import (
+	"context"
+
 	"github.com/yunfeiyang1916/toolkit/framework/breaker"
 	"github.com/yunfeiyang1916/toolkit/framework/internal/core"
-	"golang.org/x/net/context"
 )
 
+// 断路器插件
 type ikBreaker struct {
 	namespace  string
 	clientname string

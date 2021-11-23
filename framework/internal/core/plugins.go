@@ -8,6 +8,7 @@ type Plugin interface {
 	Do(context.Context, Core)
 }
 
+// Function 插件函数原型
 type Function func(context.Context, Core)
 
 func (f Function) Do(ctx context.Context, core Core) {
