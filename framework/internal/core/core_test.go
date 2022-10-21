@@ -13,12 +13,16 @@ func TestPluginGeneralCase(t *testing.T) {
 	c := New(nil)
 	c.Use(Function(func(ctx context.Context, c Core) {
 		signature += "A"
+		t.Log("A")
 		c.Next(ctx)
 		signature += "B"
+		t.Log("B")
 	}), Function(func(_ context.Context, c Core) {
 		signature += "C"
+		t.Log("C")
 	})).Use(Function(func(_ context.Context, core Core) {
 		signature += "D"
+		t.Log("D")
 	}))
 	c.Next(context.TODO())
 	assert.Equal(t, "ACDB", signature)
