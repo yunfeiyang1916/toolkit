@@ -80,20 +80,27 @@ const (
 
 var _ nodeType = static
 
+// 前缀树(字典树)节点
 // 如果我们有两个路由，分别是 /index，/inter，
 // 则根节点为 {path: "/in", indices: "dt"}
 // 两个子节点为{path: "dex", indices: ""}，{path: "ter", indices: ""}
-// 前缀树(字典树)节点
 type node struct {
-	path     string  // 当前节点相对路径（与祖先节点的 path 拼接可得到完整路径）
-	indices  string  // 所有孩子节点的path[0]组成的字符串
-	children []*node // 孩子节点
+	// 当前节点相对路径（与祖先节点的 path 拼接可得到完整路径）
+	path string
+	// 所有孩子节点的path[0]组成的字符串
+	indices string
+	// 孩子节点
+	children []*node
 	// flow      core.Core // 当前节点的处理函数（包括中间件）
-	ps        []core.Plugin
-	priority  uint32   // 当前节点及子孙节点的实际路由数量
-	nType     nodeType // 节点类型
-	maxParams uint8    // 子孙节点的最大参数数量
-	wildChild bool     // 孩子节点是否有通配符（wildcard）
+	ps []core.Plugin
+	// 当前节点及子孙节点的实际路由数量
+	priority uint32
+	// 节点类型
+	nType nodeType
+	// 子孙节点的最大参数数量
+	maxParams uint8
+	// 孩子节点是否有通配符（wildcard）
+	wildChild bool
 }
 
 // increments priority of the given child and reorders if necessary.
