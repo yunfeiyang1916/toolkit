@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"mall/service/user/rpc/types/user"
 
 	"mall/service/user/api/internal/svc"
 	"mall/service/user/api/internal/types"
@@ -24,7 +25,20 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 func (l *RegisterLogic) Register(req *types.RegisterRequest) (resp *types.RegisterResponse, err error) {
-	// todo: add your logic here and delete this line
-
+	res, err := l.svcCtx.UserRpc.Register(l.ctx, &user.RegisterRequest{
+		Name:     req.Name,
+		Gender:   req.Gender,
+		Mobile:   req.Mobile,
+		Password: req.Password,
+	})
+	if err != nil {
+		return nil, err
+	}
+	resp = &types.RegisterResponse{
+		Id:     res.GetId(),
+		Name:   res.GetName(),
+		Gender: res.GetGender(),
+		Mobile: res.GetMobile(),
+	}
 	return
 }
