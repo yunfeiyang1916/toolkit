@@ -41,3 +41,15 @@ func (s *ProductServer) Detail(ctx context.Context, in *product.DetailRequest) (
 	l := logic.NewDetailLogic(ctx, s.svcCtx)
 	return l.Detail(in)
 }
+
+// DecrStock 减少产品库存
+func (s *ProductServer) DecrStock(ctx context.Context, in *product.DecrStockRequest) (*product.DecrStockResponse, error) {
+	l := logic.NewDecrStockLogic(ctx, s.svcCtx)
+	return l.DecrStock(in)
+}
+
+// DecrStockRevert 恢复减少的库存
+func (s *ProductServer) DecrStockRevert(ctx context.Context, in *product.DecrStockRequest) (*product.DecrStockResponse, error) {
+	l := logic.NewDecrStockRevertLogic(ctx, s.svcCtx)
+	return l.DecrStockRevert(in)
+}
