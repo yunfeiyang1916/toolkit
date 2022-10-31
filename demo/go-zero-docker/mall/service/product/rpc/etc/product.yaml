@@ -3,11 +3,11 @@ ListenOn: 0.0.0.0:9001
 
 Etcd:
   Hosts:
-    - etcd:2379
+    - host.docker.internal:2379
   Key: product.rpc
 
 Mysql:
-  DataSource: root:123456@tcp(mysql:3306)/mall?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:123456@tcp(host.docker.internal:3306)/mall?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 CacheRedis:
   - Host: redis:6379

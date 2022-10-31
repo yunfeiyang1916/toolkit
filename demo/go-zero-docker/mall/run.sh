@@ -5,7 +5,7 @@ go mod tidy
 cd ${home}/service/user/rpc && sh run.sh
 cd ${home}/service/user/api && sh run.sh
 
-cd ${home}/service/product/rpc && sh run.sh
+#cd ${home}/service/product/rpc && sh run.sh
 cd ${home}/service/product/api && sh run.sh
 
 cd ${home}/service/order/rpc && sh run.sh
