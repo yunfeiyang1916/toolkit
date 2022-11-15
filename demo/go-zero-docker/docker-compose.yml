@@ -164,6 +164,7 @@ services:
       - TZ=${TZ}
     ports:
       - "${JAEGER_PORT}:16686"                        # 设置容器16686端口映射指定宿主机端口，用于宿主机访问可视化web
+      - "14268:14268"
     networks:
       - backend
     restart: always

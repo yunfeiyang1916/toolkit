@@ -1,0 +1,34 @@
+Name: User
+Host: 0.0.0.0
+Port: 8000
+
+Mysql:
+  DataSource: root:123456@tcp(mysql:3306)/mall?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+CacheRedis:
+  - Host: redis:6379
+    Pass:
+    Type: node
+
+Auth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 86400
+
+UserRpc:
+  App: userapi                          # App 标识
+  Token: 6jKNZbEpYGeUMAifz10gOnmoty3TV  # Token 值
+  Etcd:
+    Hosts:
+      - etcd:2379
+    Key: user.rpc
+
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9080
+  Path: /metrics
+
+Telemetry:
+  Name: user.api
+  Endpoint: http://jaeger:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
