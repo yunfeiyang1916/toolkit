@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package api.user.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "user/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+service User {
+  // 注册
+  rpc Register (RegisterRequest) returns (RegisterReply) {
+    option (google.api.http) = {
+      post: "/api/user/register",
+      body:"*",
+    };
+  };
+  // 登录
+  rpc Login (LoginRequest) returns (LoginReply) {
+    option (google.api.http) = {
+      post: "/api/user/login",
+      body:"*",
+    };
+  };
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
+  rpc GetUser (GetUserRequest) returns (GetUserReply) {
+    option (google.api.http) = {
+      post: "/api/user/userinfo",
+      body:"*",
+    };
+  };
+  rpc ListUser (ListUserRequest) returns (ListUserReply);
+}
+
+message RegisterRequest {
+  string Mobile = 1;
+  string Password = 2;
+}
+message RegisterReply {
+  string Name = 1;
+  int64 Gender = 2;
+  string Mobile = 3;
+  string Password = 4;
+}
+
+message LoginRequest {
+  string Mobile = 1;
+  string Password = 2;
+}
+message LoginReply {
+  int64 Id = 1;
+  string Name = 2;
+  int64 Gender = 3;
+  string Mobile = 4;
+}
+
+message CreateUserRequest {}
+message CreateUserReply {}
+
+message UpdateUserRequest {}
+message UpdateUserReply {}
+
+message DeleteUserRequest {}
+message DeleteUserReply {}
+
+message GetUserRequest {
+  int64 Id = 1;
+}
+message GetUserReply {
+  int64 Id = 1;
+  string Name = 2;
+  int64 Gender = 3;
+  string Mobile = 4;
+}
+
+message ListUserRequest {}
+message ListUserReply {}

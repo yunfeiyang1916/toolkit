@@ -1,12 +1,4 @@
 code
-data
 logs
 node_modules
-mall/service/user/user_api
-mall/service/user/user_rpc
-mall/service/user/product_api
-mall/service/user/product_rpc
-mall/service/user/pay_api
-mall/service/user/pay_rpc
-mall/service/user/order_api
-mall/service/user/order_rpc
+demo/go-zero-docker/data
