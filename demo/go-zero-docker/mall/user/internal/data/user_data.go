@@ -18,15 +18,24 @@ func NewUserRepo(data *Data, logger log.Logger) biz.UserRepo {
 }
 
 func (r *userRepo) Save(ctx context.Context, entity *biz.User) (*biz.User, error) {
-	return entity, nil
+	err := r.data.gormDB.WithContext(ctx).Save(entity).Error
+	return entity, err
 }
 
 func (r *userRepo) Update(ctx context.Context, entity *biz.User) (*biz.User, error) {
 	return entity, nil
 }
 
-func (r *userRepo) FindByID(context.Context, int64) (*biz.User, error) {
-	return nil, nil
+func (r *userRepo) FindByID(ctx context.Context, id int64) (*biz.User, error) {
+	var entity biz.User
+	err := r.data.gormDB.WithContext(ctx).Where("id=?", id).First(&entity).Error
+	return &entity, err
+}
+
+func (r *userRepo) FindByMobile(ctx context.Context, mobile string) (*biz.User, error) {
+	var entity biz.User
+	err := r.data.gormDB.WithContext(ctx).Where("mobile=?", mobile).First(&entity).Error
+	return &entity, err
 }
 
 func (r *userRepo) ListByName(context.Context, string) ([]*biz.User, error) {

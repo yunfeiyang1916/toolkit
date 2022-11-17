@@ -2,20 +2,41 @@ package service
 
 import (
 	"context"
+	"time"
+	"user/internal/biz"
 
 	pb "user/api/user/v1"
 )
 
 type UserService struct {
 	pb.UnimplementedUserServer
+	uc *biz.UserUsecase
 }
 
-func NewUserService() *UserService {
-	return &UserService{}
+func NewUserService(uc *biz.UserUsecase) *UserService {
+	return &UserService{uc: uc}
 }
 
 func (s *UserService) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterReply, error) {
-	return &pb.RegisterReply{}, nil
+	entity := &biz.User{
+		Name:       req.Name,
+		Gender:     req.Gender,
+		Mobile:     req.Mobile,
+		Password:   req.Password,
+		CreateTime: time.Now(),
+	}
+	entity.UpdateTime = entity.CreateTime
+	entity, err := s.uc.Register(ctx, entity)
+	if err != nil {
+		return nil, err
+	}
+	res := &pb.RegisterReply{
+		Name:     entity.Name,
+		Gender:   entity.Gender,
+		Mobile:   entity.Mobile,
+		Password: entity.Password,
+	}
+	return res, nil
 }
 func (s *UserService) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginReply, error) {
 	return &pb.LoginReply{}, nil

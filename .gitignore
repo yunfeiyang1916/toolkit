@@ -13,6 +13,7 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+demo/go-zero-docker/data
 demo/go-zero-docker/go-zero-mall/service/order/api/order_api
 demo/go-zero-docker/go-zero-mall/service/order/rpc/order_rpc
 demo/go-zero-docker/go-zero-mall/service/pay/api/pay_api
