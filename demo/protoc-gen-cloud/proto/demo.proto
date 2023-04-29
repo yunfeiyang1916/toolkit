@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package test;
+
+option go_package = "/test";
+
+message User{
+  // 用户名
+  string name = 1;
+  // 用户资源
+  map<int32, string> Res = 2;
+}

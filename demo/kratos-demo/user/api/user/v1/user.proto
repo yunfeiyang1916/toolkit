@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package api.user.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "user/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+service User {
+  // 创建用户
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply){
+    option (google.api.http) = {
+      post: "/api/user/create",
+      body:"*",
+    };
+  };
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply);
+  rpc GetUser (GetUserRequest) returns (GetUserReply);
+  rpc ListUser (ListUserRequest) returns (ListUserReply);
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string mobile = 2;
+  string nickname = 3;
+  string avatar = 4;
+  string password = 5;
+}
+message CreateUserReply {
+  int64 id = 1;
+  string username = 2;
+  string mobile = 3;
+  string nickname = 4;
+  string avatar = 5;
+}
+
+message UpdateUserRequest {}
+message UpdateUserReply {}
+
+message DeleteUserRequest {}
+message DeleteUserReply {}
+
+message GetUserRequest {}
+message GetUserReply {}
+
+message ListUserRequest {}
+message ListUserReply {}

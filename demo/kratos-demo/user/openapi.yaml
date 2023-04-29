@@ -1,0 +1,85 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /api/user/create:
+        post:
+            tags:
+                - User
+            description: 创建用户
+            operationId: User_CreateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.v1.CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.v1.CreateUserReply'
+    /helloworld/{name}:
+        get:
+            tags:
+                - Greeter
+            description: Sends a greeting
+            operationId: Greeter_SayHello
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+components:
+    schemas:
+        api.user.v1.CreateUserReply:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                username:
+                    type: string
+                mobile:
+                    type: string
+                nickname:
+                    type: string
+                avatar:
+                    type: string
+        api.user.v1.CreateUserRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                mobile:
+                    type: string
+                nickname:
+                    type: string
+                avatar:
+                    type: string
+                password:
+                    type: string
+        helloworld.v1.HelloReply:
+            type: object
+            properties:
+                message:
+                    type: string
+            description: The response message containing the greetings
+tags:
+    - name: Greeter
+      description: The greeting service definition.
+    - name: User
